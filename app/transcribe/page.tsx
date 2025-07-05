@@ -7,12 +7,17 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
+import { 
+  TranscriptionResponse, 
+  TranscriptionTheme, 
+  ApiTranscriptionResponse 
+} from "@/models/transcription";
 
 export default function TranscribePage() {
   const [accessCode, setAccessCode] = useState("");
   const [audioUrl, setAudioUrl] = useState("");
   const [selectedTheme, setSelectedTheme] = useState("general");
-  const [transcription, setTranscription] = useState<any>(null);
+  const [transcription, setTranscription] = useState<TranscriptionResponse | null>(null);
   const [copied, setCopied] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   
@@ -20,7 +25,7 @@ export default function TranscribePage() {
   const [dragActive, setDragActive] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-  const themes = [
+  const themes: TranscriptionTheme[] = [
     { value: "general", label: "Geral" },
     { value: "medical", label: "Médico" },
     { value: "business", label: "Negócios" },
@@ -69,23 +74,23 @@ export default function TranscribePage() {
     }
   };
 
-  const transcribeAudio = async (formData: FormData) => {
+  const transcribeAudio = async (formData: FormData): Promise<TranscriptionResponse> => {
     const response = await fetch('/api/transcribe', {
       method: 'POST',
       body: formData,
     });
 
-    const data = await response.json();
+    const data: ApiTranscriptionResponse = await response.json();
 
     if (!response.ok) {
-      throw new Error(data.error || "Erro ao transcrever áudio");
+      throw new Error('error' in data ? data.error : "Erro ao transcrever áudio");
     }
 
     if (!data.success) {
-      throw new Error(data.error || "Falha na transcrição");
+      throw new Error('error' in data ? data.error : "Falha na transcrição");
     }
 
-    return data;
+    return data as TranscriptionResponse;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -118,7 +123,7 @@ export default function TranscribePage() {
       transcribeAudio(formData),
       {
         loading: 'Transcrevendo áudio...',
-        success: (data) => {
+        success: (data: TranscriptionResponse) => {
           setTranscription(data);
           setIsLoading(false);
           return 'Transcrição realizada com sucesso!';
@@ -138,7 +143,7 @@ export default function TranscribePage() {
       setCopied(true);
       toast.success("Texto copiado para a área de transferência!");
       setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
+    } catch {
       toast.error("Erro ao copiar texto");
     }
   };

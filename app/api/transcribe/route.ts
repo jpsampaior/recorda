@@ -1,16 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import { AssemblyAI } from "assemblyai";
+import { TranscriptionResponse, TranscriptionError } from "@/models/transcription";
 
 const assemblyAiApiKey = process.env.ASSEMBLYAI_API_KEY;
-const accessCode = process.env.ACCESS_CODE;
+const accessCodeKey = process.env.ACCESS_CODE;
 
 export async function POST(request: NextRequest) {
   try {
     if (!assemblyAiApiKey) {
-      return NextResponse.json(
-        { error: "Credenciais do AssemblyAI não configuradas" },
-        { status: 500 }
-      );
+      const errorResponse: TranscriptionError = {
+        success: false,
+        error: "Credenciais do AssemblyAI não configuradas"
+      };
+      return NextResponse.json(errorResponse, { status: 500 });
     }
 
     const formData = await request.formData();
@@ -20,24 +22,27 @@ export async function POST(request: NextRequest) {
     const theme = formData.get("theme") as string;
 
     if (!accessCode) {
-      return NextResponse.json(
-        { error: "Access code é obrigatório" },
-        { status: 400 }
-      );
+      const errorResponse: TranscriptionError = {
+        success: false,
+        error: "Access code é obrigatório"
+      };
+      return NextResponse.json(errorResponse, { status: 400 });
     }
 
-    if (accessCode !== accessCode) {
-      return NextResponse.json(
-        { error: "Access code inválido" },
-        { status: 400 }
-      );
+    if (accessCode !== accessCodeKey) {
+      const errorResponse: TranscriptionError = {
+        success: false,
+        error: "Access code inválido"
+      };
+      return NextResponse.json(errorResponse, { status: 400 });
     }
 
     if (!audioFile && !audioUrl) {
-      return NextResponse.json(
-        { error: "Arquivo de áudio ou URL do áudio é obrigatório" },
-        { status: 400 }
-      );
+      const errorResponse: TranscriptionError = {
+        success: false,
+        error: "Arquivo de áudio ou URL do áudio é obrigatório"
+      };
+      return NextResponse.json(errorResponse, { status: 400 });
     }
 
     const assemblyAiClient = new AssemblyAI({
@@ -70,24 +75,24 @@ export async function POST(request: NextRequest) {
 
     const fullText = transcript.text;
 
-    return NextResponse.json({
+    const successResponse: TranscriptionResponse = {
       success: true,
       accessCode,
       transcriptId: transcript.id,
-      fullText: fullText?.trim(),
+      fullText: fullText?.trim() || "",
       inputType: audioFile ? "file" : "url",
       theme: theme || "general",
-    });
+    };
+
+    return NextResponse.json(successResponse);
 
   } catch (error) {
     console.error("Erro ao processar transcrição:", error);
-    return NextResponse.json(
-      {
-        success: false,
-        error: error instanceof Error ? error.message : "Erro desconhecido",
-      },
-      { status: 500 }
-    );
+    const errorResponse: TranscriptionError = {
+      success: false,
+      error: error instanceof Error ? error.message : "Erro desconhecido",
+    };
+    return NextResponse.json(errorResponse, { status: 500 });
   }
 }
 
@@ -97,17 +102,19 @@ export async function GET(request: NextRequest) {
     const transcriptId = searchParams.get("transcriptId");
 
     if (!transcriptId) {
-      return NextResponse.json(
-        { error: "Transcript ID é obrigatório" },
-        { status: 400 }
-      );
+      const errorResponse: TranscriptionError = {
+        success: false,
+        error: "Transcript ID é obrigatório"
+      };
+      return NextResponse.json(errorResponse, { status: 400 });
     }
 
     if (!assemblyAiApiKey) {
-      return NextResponse.json(
-        { error: "Credenciais do AssemblyAI não configuradas" },
-        { status: 500 }
-      );
+      const errorResponse: TranscriptionError = {
+        success: false,
+        error: "Credenciais do AssemblyAI não configuradas"
+      };
+      return NextResponse.json(errorResponse, { status: 500 });
     }
 
     const assemblyAiClient = new AssemblyAI({
@@ -116,22 +123,22 @@ export async function GET(request: NextRequest) {
 
     const transcript = await assemblyAiClient.transcripts.get(transcriptId);
 
-    return NextResponse.json({
+    const successResponse = {
       success: true,
       transcriptId,
       status: transcript.status,
       text: transcript.text,
       utterances: transcript.utterances,
-    });
+    };
+
+    return NextResponse.json(successResponse);
 
   } catch (error) {
     console.error("Erro ao buscar transcrição:", error);
-    return NextResponse.json(
-      {
-        success: false,
-        error: error instanceof Error ? error.message : "Erro desconhecido",
-      },
-      { status: 500 }
-    );
+    const errorResponse: TranscriptionError = {
+      success: false,
+      error: error instanceof Error ? error.message : "Erro desconhecido",
+    };
+    return NextResponse.json(errorResponse, { status: 500 });
   }
 }
