@@ -46,100 +46,100 @@
 :root {
   --radius: 0.625rem;
   
-  /* Paleta principal - Tons azuis pastel e neutros suaves */
-  --background: oklch(0.99 0.002 240);
-  --foreground: oklch(0.18 0.01 240);
+  /* Paleta principal - Tons roxos vibrantes e alegres */
+  --background: oklch(0.99 0.005 280);
+  --foreground: oklch(0.18 0.015 280);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.01 240);
+  --card-foreground: oklch(0.18 0.015 280);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0.01 240);
+  --popover-foreground: oklch(0.18 0.015 280);
   
-  /* Cor primária - Azul suave e acolhedor */
-  --primary: oklch(0.55 0.08 240);
-  --primary-foreground: oklch(0.99 0.002 240);
+  /* Cor primária - Roxo vibrante e alegre */
+  --primary: oklch(0.60 0.15 280);
+  --primary-foreground: oklch(0.99 0.005 280);
   
-  /* Cor secundária - Azul mais claro e neutro */
-  --secondary: oklch(0.92 0.03 240);
-  --secondary-foreground: oklch(0.18 0.01 240);
+  /* Cor secundária - Roxo mais claro e energético */
+  --secondary: oklch(0.90 0.08 280);
+  --secondary-foreground: oklch(0.18 0.015 280);
   
-  /* Cor de destaque - Azul acinzentado suave */
-  --accent: oklch(0.88 0.02 240);
-  --accent-foreground: oklch(0.18 0.01 240);
+  /* Cor de destaque - Roxo acinzentado mais vibrante */
+  --accent: oklch(0.85 0.06 280);
+  --accent-foreground: oklch(0.18 0.015 280);
   
-  /* Neutros suaves */
-  --muted: oklch(0.96 0.005 240);
-  --muted-foreground: oklch(0.45 0.01 240);
-  --border: oklch(0.90 0.01 240);
-  --input: oklch(0.90 0.01 240);
-  --ring: oklch(0.55 0.08 240 / 0.2);
+  /* Neutros suaves com toque de roxo */
+  --muted: oklch(0.96 0.008 280);
+  --muted-foreground: oklch(0.45 0.015 280);
+  --border: oklch(0.88 0.015 280);
+  --input: oklch(0.88 0.015 280);
+  --ring: oklch(0.60 0.15 280 / 0.3);
   
-  /* Destrutivo - Vermelho suave */
-  --destructive: oklch(0.65 0.12 25);
+  /* Destrutivo - Vermelho vibrante e alegre */
+  --destructive: oklch(0.70 0.18 25);
   
-  /* Cores para gráficos - Paleta harmoniosa em tons azuis */
-  --chart-1: oklch(0.55 0.08 240);   /* Azul primário */
-  --chart-2: oklch(0.65 0.06 220);   /* Azul mais claro */
-  --chart-3: oklch(0.75 0.04 200);   /* Azul acinzentado */
-  --chart-4: oklch(0.70 0.05 260);   /* Azul violeta */
-  --chart-5: oklch(0.60 0.07 180);   /* Azul esverdeado */
+  /* Cores para gráficos - Paleta vibrante e alegre */
+  --chart-1: oklch(0.60 0.15 280);   /* Roxo primário vibrante */
+  --chart-2: oklch(0.70 0.12 300);   /* Roxo mais claro e alegre */
+  --chart-3: oklch(0.80 0.08 320);   /* Roxo acinzentado vibrante */
+  --chart-4: oklch(0.65 0.14 260);   /* Roxo violeta energético */
+  --chart-5: oklch(0.75 0.10 340);   /* Roxo rosado alegre */
   
-  /* Sidebar - Versão mais suave */
-  --sidebar: oklch(0.98 0.002 240);
-  --sidebar-foreground: oklch(0.18 0.01 240);
-  --sidebar-primary: oklch(0.55 0.08 240);
-  --sidebar-primary-foreground: oklch(0.99 0.002 240);
-  --sidebar-accent: oklch(0.94 0.01 240);
-  --sidebar-accent-foreground: oklch(0.18 0.01 240);
-  --sidebar-border: oklch(0.90 0.01 240);
-  --sidebar-ring: oklch(0.55 0.08 240 / 0.2);
+  /* Sidebar - Versão mais vibrante */
+  --sidebar: oklch(0.98 0.005 280);
+  --sidebar-foreground: oklch(0.18 0.015 280);
+  --sidebar-primary: oklch(0.60 0.15 280);
+  --sidebar-primary-foreground: oklch(0.99 0.005 280);
+  --sidebar-accent: oklch(0.92 0.015 280);
+  --sidebar-accent-foreground: oklch(0.18 0.015 280);
+  --sidebar-border: oklch(0.88 0.015 280);
+  --sidebar-ring: oklch(0.60 0.15 280 / 0.3);
 }
 
 .dark {
-  --background: oklch(0.08 0.01 240);
-  --foreground: oklch(0.95 0.002 240);
-  --card: oklch(0.12 0.01 240);
-  --card-foreground: oklch(0.95 0.002 240);
-  --popover: oklch(0.12 0.01 240);
-  --popover-foreground: oklch(0.95 0.002 240);
+  --background: oklch(0.08 0.015 280);
+  --foreground: oklch(0.95 0.005 280);
+  --card: oklch(0.12 0.015 280);
+  --card-foreground: oklch(0.95 0.005 280);
+  --popover: oklch(0.12 0.015 280);
+  --popover-foreground: oklch(0.95 0.005 280);
   
-  /* Azul mais vibrante no modo escuro */
-  --primary: oklch(0.65 0.12 240);
-  --primary-foreground: oklch(0.08 0.01 240);
+  /* Roxo mais vibrante e alegre no modo escuro */
+  --primary: oklch(0.70 0.18 280);
+  --primary-foreground: oklch(0.08 0.015 280);
   
-  /* Azul mais profundo */
-  --secondary: oklch(0.15 0.03 240);
-  --secondary-foreground: oklch(0.95 0.002 240);
+  /* Roxo mais profundo e energético */
+  --secondary: oklch(0.18 0.08 280);
+  --secondary-foreground: oklch(0.95 0.005 280);
   
-  /* Azul acinzentado mais vibrante */
-  --accent: oklch(0.20 0.02 240);
-  --accent-foreground: oklch(0.95 0.002 240);
+  /* Roxo acinzentado mais vibrante */
+  --accent: oklch(0.25 0.06 280);
+  --accent-foreground: oklch(0.95 0.005 280);
   
-  /* Neutros escuros */
-  --muted: oklch(0.15 0.01 240);
-  --muted-foreground: oklch(0.65 0.01 240);
-  --border: oklch(0.20 0.01 240);
-  --input: oklch(0.20 0.01 240);
-  --ring: oklch(0.65 0.12 240 / 0.2);
+  /* Neutros escuros com mais vida */
+  --muted: oklch(0.15 0.015 280);
+  --muted-foreground: oklch(0.70 0.015 280);
+  --border: oklch(0.22 0.015 280);
+  --input: oklch(0.22 0.015 280);
+  --ring: oklch(0.70 0.18 280 / 0.3);
   
-  /* Destrutivo mais vibrante */
-  --destructive: oklch(0.70 0.15 25);
+  /* Destrutivo mais vibrante e alegre */
+  --destructive: oklch(0.75 0.20 25);
   
-  /* Cores para gráficos - Versão escura */
-  --chart-1: oklch(0.65 0.12 240);   /* Azul primário */
-  --chart-2: oklch(0.55 0.08 220);   /* Azul mais claro */
-  --chart-3: oklch(0.45 0.06 200);   /* Azul acinzentado */
-  --chart-4: oklch(0.60 0.10 260);   /* Azul violeta */
-  --chart-5: oklch(0.50 0.09 180);   /* Azul esverdeado */
+  /* Cores para gráficos - Versão escura vibrante */
+  --chart-1: oklch(0.70 0.18 280);   /* Roxo primário vibrante */
+  --chart-2: oklch(0.60 0.12 300);   /* Roxo mais claro e alegre */
+  --chart-3: oklch(0.50 0.10 320);   /* Roxo acinzentado vibrante */
+  --chart-4: oklch(0.65 0.16 260);   /* Roxo violeta energético */
+  --chart-5: oklch(0.55 0.14 340);   /* Roxo rosado alegre */
   
-  /* Sidebar escura */
-  --sidebar: oklch(0.10 0.01 240);
-  --sidebar-foreground: oklch(0.95 0.002 240);
-  --sidebar-primary: oklch(0.65 0.12 240);
-  --sidebar-primary-foreground: oklch(0.08 0.01 240);
-  --sidebar-accent: oklch(0.18 0.01 240);
-  --sidebar-accent-foreground: oklch(0.95 0.002 240);
-  --sidebar-border: oklch(0.20 0.01 240);
-  --sidebar-ring: oklch(0.65 0.12 240 / 0.2);
+  /* Sidebar escura mais vibrante */
+  --sidebar: oklch(0.10 0.015 280);
+  --sidebar-foreground: oklch(0.95 0.005 280);
+  --sidebar-primary: oklch(0.70 0.18 280);
+  --sidebar-primary-foreground: oklch(0.08 0.015 280);
+  --sidebar-accent: oklch(0.20 0.015 280);
+  --sidebar-accent-foreground: oklch(0.95 0.005 280);
+  --sidebar-border: oklch(0.22 0.015 280);
+  --sidebar-ring: oklch(0.70 0.18 280 / 0.3);
 }
 
 @layer base {
