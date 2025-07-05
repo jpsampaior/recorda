@@ -131,17 +131,17 @@ export default function Home() {
               <div className="bg-card rounded-2xl shadow-2xl p-8 animate-float border border-border">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div className="bg-primary rounded-xl p-6 text-primary-foreground">
-                    <Smartphone className="w-12 h-12 mb-4" />
+                    <Smartphone className="mx-auto w-12 h-12 mb-4" />
                     <h3 className="text-xl font-semibold mb-2">Envie pelo WhatsApp</h3>
                     <p className="text-sm opacity-90">Fotos, áudios e textos de forma simples</p>
                   </div>
                   <div className="bg-secondary rounded-xl p-6 text-secondary-foreground">
-                    <Sparkles className="w-12 h-12 mb-4" />
+                    <Sparkles className="mx-auto w-12 h-12 mb-4" />
                     <h3 className="text-xl font-semibold mb-2">IA Processa</h3>
                     <p className="text-sm opacity-90">Tecnologia cria sua história automaticamente</p>
                   </div>
                   <div className="bg-accent rounded-xl p-6 text-accent-foreground">
-                    <BookOpen className="w-12 h-12 mb-4" />
+                    <BookOpen className="mx-auto w-12 h-12 mb-4" />
                     <h3 className="text-xl font-semibold mb-2">Receba seu Livro</h3>
                     <p className="text-sm opacity-90">Digital ou físico, você escolhe!</p>
                   </div>
@@ -164,7 +164,7 @@ export default function Home() {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
               <div 
                 key={index}
@@ -183,7 +183,7 @@ export default function Home() {
       </section>
 
       {/* Poder da IA */}
-      <section className="py-20 px-4 bg-muted/30">
+      <section className="p-20 bg-muted/30">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className={`${isVisible ? 'animate-slide-in-up' : 'opacity-0'}`}>
@@ -296,7 +296,7 @@ export default function Home() {
       </section>
 
       {/* Depoimentos */}
-      <section id="depoimentos" className="py-20 px-4 bg-muted/30">
+      <section id="depoimentos" className="p-20 bg-muted/30">
         <div className="container mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
@@ -399,7 +399,7 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t border-border mt-8 pt-8 text-center text-muted-foreground">
-            <p>&copy; 2024 Recorda. Todos os direitos reservados.</p>
+            <p>&copy; 2025 Recorda. Todos os direitos reservados.</p>
           </div>
         </div>
       </footer>
