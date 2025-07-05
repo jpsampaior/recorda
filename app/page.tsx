@@ -11,11 +11,7 @@ import {
   Smartphone, 
   Heart, 
   Star, 
-  ArrowRight,
   CheckCircle,
-  Zap,
-  Users,
-  Award,
   Send
 } from "lucide-react";
 
@@ -164,7 +160,7 @@ export default function Home() {
             </p>
           </div>
           
-          <div className="px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
               <div 
                 key={index}
@@ -183,7 +179,7 @@ export default function Home() {
       </section>
 
       {/* Poder da IA */}
-      <section className="p-20 bg-muted/30">
+      <section className="p-8 md:p-20 bg-muted">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className={`${isVisible ? 'animate-slide-in-up' : 'opacity-0'}`}>
@@ -296,7 +292,7 @@ export default function Home() {
       </section>
 
       {/* Depoimentos */}
-      <section id="depoimentos" className="p-20 bg-muted/30">
+      <section id="depoimentos" className="p-8 md:p-20 bg-muted">
         <div className="container mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
