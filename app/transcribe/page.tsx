@@ -12,9 +12,9 @@ export default function TranscribePage() {
   const [accessCode, setAccessCode] = useState("");
   const [audioUrl, setAudioUrl] = useState("");
   const [selectedTheme, setSelectedTheme] = useState("general");
-  const [isLoading, setIsLoading] = useState(false);
   const [transcription, setTranscription] = useState<any>(null);
   const [copied, setCopied] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [dragActive, setDragActive] = useState(false);
@@ -69,6 +69,25 @@ export default function TranscribePage() {
     }
   };
 
+  const transcribeAudio = async (formData: FormData) => {
+    const response = await fetch('/api/transcribe', {
+      method: 'POST',
+      body: formData,
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "Erro ao transcrever áudio");
+    }
+
+    if (!data.success) {
+      throw new Error(data.error || "Falha na transcrição");
+    }
+
+    return data;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -85,36 +104,32 @@ export default function TranscribePage() {
     setIsLoading(true);
     setTranscription(null);
 
-    try {
-      const formData = new FormData();
-      formData.append('accessCode', accessCode);
-      formData.append('theme', selectedTheme);
-      
-      if (selectedFile) {
-        formData.append('audioFile', selectedFile);
-      } else if (audioUrl) {
-        formData.append('audioUrl', audioUrl);
-      }
-
-      const response = await fetch('/api/transcribe', {
-        method: 'POST',
-        body: formData,
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        setTranscription(data);
-        toast.success("Transcrição realizada com sucesso!");
-      } else {
-        toast.error(data.error || "Erro ao transcrever áudio");
-      }
-    } catch (error) {
-      console.error('Erro:', error);
-      toast.error("Erro ao processar transcrição");
-    } finally {
-      setIsLoading(false);
+    const formData = new FormData();
+    formData.append('accessCode', accessCode);
+    formData.append('theme', selectedTheme);
+    
+    if (selectedFile) {
+      formData.append('audioFile', selectedFile);
+    } else if (audioUrl) {
+      formData.append('audioUrl', audioUrl);
     }
+
+    toast.promise(
+      transcribeAudio(formData),
+      {
+        loading: 'Transcrevendo áudio...',
+        success: (data) => {
+          setTranscription(data);
+          setIsLoading(false);
+          return 'Transcrição realizada com sucesso!';
+        },
+        error: (error) => {
+          console.error('Erro:', error);
+          setIsLoading(false);
+          return error.message || 'Erro ao processar transcrição';
+        },
+      }
+    );
   };
 
   const copyToClipboard = async (text: string) => {
@@ -167,6 +182,7 @@ export default function TranscribePage() {
                 onChange={(e) => setAccessCode(e.target.value)}
                 placeholder="Digite o access code"
                 required
+                disabled={isLoading}
               />
             </div>
 
@@ -176,7 +192,7 @@ export default function TranscribePage() {
                 <Palette className="w-4 h-4" />
                 <span>Tema</span>
               </Label>
-              <Select value={selectedTheme} onValueChange={setSelectedTheme}>
+              <Select value={selectedTheme} onValueChange={setSelectedTheme} disabled={isLoading}>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Selecione um tema" />
                 </SelectTrigger>
@@ -205,7 +221,7 @@ export default function TranscribePage() {
                     dragActive 
                       ? 'border-primary bg-primary/5' 
                       : 'border-border hover:border-primary/50'
-                  }`}
+                  } ${isLoading ? 'opacity-50 pointer-events-none' : ''}`}
                   onDragEnter={handleDrag}
                   onDragLeave={handleDrag}
                   onDragOver={handleDrag}
@@ -217,6 +233,7 @@ export default function TranscribePage() {
                     accept="audio/*"
                     onChange={handleFileSelect}
                     className="hidden"
+                    disabled={isLoading}
                   />
                   <FileAudio className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
                   <p className="text-foreground mb-2">
@@ -229,6 +246,7 @@ export default function TranscribePage() {
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
                     className="mt-4"
+                    disabled={isLoading}
                   >
                     Selecionar Arquivo
                   </Button>
@@ -249,6 +267,7 @@ export default function TranscribePage() {
                     setSelectedFile(null); // Limpar arquivo se URL for inserida
                   }}
                   placeholder="https://exemplo.com/audio.mp3"
+                  disabled={isLoading}
                 />
               </div>
             </div>
@@ -257,9 +276,9 @@ export default function TranscribePage() {
             <div className="flex space-x-4">
               <Button
                 type="submit"
-                disabled={isLoading}
                 className="flex-1"
                 size="lg"
+                disabled={isLoading}
               >
                 {isLoading ? (
                   <>
@@ -276,6 +295,7 @@ export default function TranscribePage() {
                 onClick={clearForm}
                 variant="outline"
                 size="lg"
+                disabled={isLoading}
               >
                 Limpar
               </Button>
