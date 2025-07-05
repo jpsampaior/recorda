@@ -17,6 +17,7 @@ export async function POST(request: NextRequest) {
     const accessCode = formData.get("accessCode") as string;
     const audioFile = formData.get("audioFile") as File;
     const audioUrl = formData.get("audioUrl") as string;
+    const theme = formData.get("theme") as string;
 
     if (!accessCode) {
       return NextResponse.json(
@@ -75,6 +76,7 @@ export async function POST(request: NextRequest) {
       transcriptId: transcript.id,
       fullText: fullText?.trim(),
       inputType: audioFile ? "file" : "url",
+      theme: theme || "general",
     });
 
   } catch (error) {

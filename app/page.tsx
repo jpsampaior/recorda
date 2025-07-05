@@ -90,6 +90,7 @@ export default function Home() {
             <a href="#recursos" className="text-muted-foreground hover:text-primary transition-colors">Recursos</a>
             <a href="#depoimentos" className="text-muted-foreground hover:text-primary transition-colors">Depoimentos</a>
             <a href="#contato" className="text-muted-foreground hover:text-primary transition-colors">Contato</a>
+            <a href="/transcribe" className="text-muted-foreground hover:text-primary transition-colors">Transcrição</a>
           </nav>
           <button className="bg-primary text-primary-foreground px-6 py-2 rounded-full hover-lift font-medium">
             Começar Agora
