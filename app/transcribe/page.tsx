@@ -27,11 +27,9 @@ export default function TranscribePage() {
 
   const themes: TranscriptionTheme[] = [
     { value: "general", label: "Geral" },
-    { value: "medical", label: "Médico" },
-    { value: "business", label: "Negócios" },
-    { value: "education", label: "Educação" },
-    { value: "legal", label: "Jurídico" },
-    { value: "technical", label: "Técnico" },
+    { value: "travel", label: "Viagem" },
+    { value: "birthday", label: "Aniversário" },
+    { value: "wedding", label: "Casamento" },
   ];
 
   const handleDrag = (e: React.DragEvent) => {
